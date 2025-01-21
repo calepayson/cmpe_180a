@@ -9,7 +9,13 @@ int main() {
     int mode{};
     std::cin >> mode;
 
-    std::cout << "You chose (" << mode << ")\n";
+    if (mode == 1) {
+        std::cout << "You chose (1) Quick!\n";
+    } else if (mode == 2) {
+        std::cout << "You chose (2) Precise!\n";
+    } else {
+        std::cout << "Error: mode (" << mode << ") not recognized!\n";
+    }
 
     return 0;
 }
