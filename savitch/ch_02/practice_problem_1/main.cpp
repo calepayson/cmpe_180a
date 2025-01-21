@@ -14,5 +14,8 @@ int main() {
     std::cout.setf(std::ios::showpoint);
     std::cout.precision(2);
 
+    double boxes_per_ton{1 / tons};
+    std::cout << boxes_per_ton << " boxes needed to yield 1 metric ton.\n";
+
     return 0;
 }
