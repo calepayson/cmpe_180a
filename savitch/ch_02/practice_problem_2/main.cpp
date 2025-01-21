@@ -24,6 +24,24 @@ double quick_sqrt(double num) {
     return guess;
 }
 
+double precise_sqrt(double num) {
+    double previous_guess{};
+    double current_guess{num / 2};
+    double r{};
+
+    double similarity{0};
+
+    while (similarity < 0.99 || similarity > 1.01) {
+        previous_guess = current_guess;
+        r = num / current_guess;
+        current_guess = (current_guess + r) / 2;
+
+        similarity = previous_guess / current_guess;
+    }
+
+    return current_guess;
+}
+
 int main() {
     std::cout << "Welcome to square root.\n"
               << "Available modes: \n"
@@ -48,6 +66,8 @@ int main() {
         std::cout << "You chose (2) Precise!\n";
         double num{get_double()};
         std::cout << "Calculating square root of " << num << "...\n";
+        double result{precise_sqrt(num)};
+        std::cout << "The square root of " << num << " is " << result << '\n';
     } else {
         std::cout << "Error: mode (" << mode << ") not recognized!\n";
     }
