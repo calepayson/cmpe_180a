@@ -9,30 +9,39 @@ double get_monthly_payment(double amount, double period) {
 }
 
 int main() {
-    // Get desired amount from user
-    std::cout << "Enter desired amount: $";
-    double desired_amount{};
-    std::cin >> desired_amount;
+    char proceed{'y'};
 
-    // Get rate from user
-    std::cout << "Enter rate: ";
-    double rate{};
-    std::cin >> rate;
+    while (proceed == 'y' || proceed == 'Y') {
+        // Get desired amount from user
+        std::cout << "Enter desired amount: $";
+        double desired_amount{};
+        std::cin >> desired_amount;
 
-    // Get period from user
-    std::cout << "Enter period (years): ";
-    double period{};
-    std::cin >> period;
+        // Get rate from user
+        std::cout << "Enter rate: ";
+        double rate{};
+        std::cin >> rate;
 
-    std::cout.setf(std::ios::fixed);
-    std::cout.setf(std::ios::showpoint);
-    std::cout.precision(2);
+        // Get period from user
+        std::cout << "Enter period (years): ";
+        double period{};
+        std::cin >> period;
 
-    double face_value{get_face_value(desired_amount, rate, period)};
-    std::cout << "Face value of loan: $" << face_value << '\n';
+        std::cout.setf(std::ios::fixed);
+        std::cout.setf(std::ios::showpoint);
+        std::cout.precision(2);
 
-    double monthly_payment{get_monthly_payment(face_value, period)};
-    std::cout << "Monthly loan payment: $" << monthly_payment << '\n';
+        double face_value{get_face_value(desired_amount, rate, period)};
+        std::cout << "Face value of loan: $" << face_value << '\n';
+
+        double monthly_payment{get_monthly_payment(face_value, period)};
+        std::cout << "Monthly loan payment: $" << monthly_payment << '\n';
+
+        std::cout << '\n';
+
+        std::cout << "Proceed? (y/n) ";
+        std::cin >> proceed;
+    }
 
     return 0;
 }
