@@ -74,49 +74,50 @@ void print_horoscope(Sign sign) {
 }
 
 int main() {
-    std::cout << "Please enter your birthday!\n";
-    std::cout << "Month (1-12): ";
-    int birth_month{};
-    std::cin >> birth_month;
-    std::cout << "Day (1-31): ";
-    int birth_date{};
-    std::cin >> birth_date;
+    char proceed{'y'};
+    while (proceed == 'y' || proceed == 'Y') {
+        std::cout << "Please enter your birthday!\n";
+        std::cout << "Month (1-12): ";
+        int birth_month{};
+        std::cin >> birth_month;
+        std::cout << "Day (1-31): ";
+        int birth_date{};
+        std::cin >> birth_date;
 
-    std::cout << "Your birthday is: " << birth_month << '-' << birth_date
-              << '\n';
+        // Convert birthday to an int of the format MMDD
+        //  By using a single int, ranges can be found easier
+        int date_map = (birth_month * 100) + birth_date;
 
-    // Convert birthday to an int of the format MMDD
-    //  By using a single int, ranges can be found easier
-    int date_map = (birth_month * 100) + birth_date;
+        if (date_map <= CAPRICORN_END)
+            print_horoscope(Sign::CAPRICORN);
+        else if (date_map <= AQUARIUS_END)
+            print_horoscope(Sign::AQUARIUS);
+        else if (date_map <= PISCES_END)
+            print_horoscope(Sign::PISCES);
+        else if (date_map <= ARIES_END)
+            print_horoscope(Sign::ARIES);
+        else if (date_map <= TAURUS_END)
+            print_horoscope(Sign::TAURUS);
+        else if (date_map <= GEMINI_END)
+            print_horoscope(Sign::GEMINI);
+        else if (date_map <= CANCER_END)
+            print_horoscope(Sign::CANCER);
+        else if (date_map <= LEO_END)
+            print_horoscope(Sign::LEO);
+        else if (date_map <= VIRGO_END)
+            print_horoscope(Sign::VIRGO);
+        else if (date_map <= LIBRA_END)
+            print_horoscope(Sign::LIBRA);
+        else if (date_map <= SCORPIO_END)
+            print_horoscope(Sign::SCORPIO);
+        else if (date_map <= SAGITTARIUS_END)
+            print_horoscope(Sign::SAGITTARIUS);
+        else
+            print_horoscope(Sign::CAPRICORN);
 
-    std::cout << "Date_map: " << date_map << '\n';
-
-    if (date_map <= CAPRICORN_END)
-        print_horoscope(Sign::CAPRICORN);
-    else if (date_map <= AQUARIUS_END)
-        print_horoscope(Sign::AQUARIUS);
-    else if (date_map <= PISCES_END)
-        print_horoscope(Sign::PISCES);
-    else if (date_map <= ARIES_END)
-        print_horoscope(Sign::ARIES);
-    else if (date_map <= TAURUS_END)
-        print_horoscope(Sign::TAURUS);
-    else if (date_map <= GEMINI_END)
-        print_horoscope(Sign::GEMINI);
-    else if (date_map <= CANCER_END)
-        print_horoscope(Sign::CANCER);
-    else if (date_map <= LEO_END)
-        print_horoscope(Sign::LEO);
-    else if (date_map <= VIRGO_END)
-        print_horoscope(Sign::VIRGO);
-    else if (date_map <= LIBRA_END)
-        print_horoscope(Sign::LIBRA);
-    else if (date_map <= SCORPIO_END)
-        print_horoscope(Sign::SCORPIO);
-    else if (date_map <= SAGITTARIUS_END)
-        print_horoscope(Sign::SAGITTARIUS);
-    else
-        print_horoscope(Sign::CAPRICORN);
+        std::cout << "Proceed? (y/n): ";
+        std::cin >> proceed;
+    }
 
     return 0;
 }
