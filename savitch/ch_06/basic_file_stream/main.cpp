@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iostream>
 #include <string>
 
 int main() {
@@ -9,6 +10,11 @@ int main() {
     ofstream out_stream;
 
     in_stream.open("name.txt");
+    if (in_stream.fail()) {
+        cout << "ERROR: Failed to open name.txt\n";
+        exit(1);
+    }
+
     in_stream >> first_name >> last_name;
 
     out_stream.open("secret_message.txt");
