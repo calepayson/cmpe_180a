@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
   printf("argc[0] = %s\n", argv[0]);
 
   if (argc < 2) {
-    printf("Argument count should be 2 or larger\n");
+    fprintf(stderr, "Argument count should be 2 or larger\n");
     return 1;
   }
 
