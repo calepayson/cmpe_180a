@@ -7,7 +7,7 @@ int main() {
     char symbol;
     do {
         cin.get(symbol);
-        cout << symbol;
+        cout.put(symbol);
     } while (symbol != '\n');
     cout << "That's all for this demonstration.\n";
 
