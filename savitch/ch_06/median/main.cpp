@@ -67,34 +67,47 @@ int nums_in_file(istream &fin) {
 
 double get_median(istream &fin, int start, int stop) {
     using std::cerr;
-    int count, idx, target;
+    int count;
     double current;
 
     count = stop - start;
+
     if (count <= 0) {
         cerr << "Error: Input range is zero or negative.\n";
         exit(1);
     }
 
-    // Get to start of range
-    idx = 0;
-    while (idx < start) {
-        fin >> current;
-        idx++;
-    }
+    if (count % 2 == 1) {
+        count++;
 
-    // Grab the median
-    target = count / 2;
-    do {
-        fin >> current;
-        idx++;
-    } while (idx < target);
+        // Get to start of range
+        for (int i = 0; i < start; i++) {
+            fin >> current;
+        }
 
-    // Take the average of two items if the median falls between them
-    if (count % 2 == 0) {
-        double next;
-        fin >> next;
-        current = (current + next) / 2;
+        // Grab the median
+        int offset = 0;
+        for (; offset < count / 2; ++offset) {
+            fin >> current;
+        }
+    } else {
+        // Get to start of range
+        for (int i = 0; i < start; i++) {
+            fin >> current;
+        }
+
+        // Grab the median
+        int offset = 0;
+        for (; offset < count / 2; ++offset) {
+            fin >> current;
+        }
+
+        // Take the average of two items if the median falls between them
+        if (count % 2 == 0) {
+            double next;
+            fin >> next;
+            current = (current + next) / 2;
+        }
     }
 
     return current;
