@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <stdio.h>  // Needed for printf() stdc library
+#include <stdlib.h> // Needed for atoi() stdc library
 
 int factorial(int n) {
   int f = 1;
