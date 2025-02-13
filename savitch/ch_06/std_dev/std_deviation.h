@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "average.h"
+using std::istream;
 
 #ifndef __STD_DEVIATION_H__
 #define __STD_DEVIATION_H__
