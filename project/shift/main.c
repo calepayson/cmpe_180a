@@ -95,10 +95,8 @@ char *shiftstring(int num, char *phrase) {
   strcat(doubled_phrase, phrase);
 
   // Calculate the starting index given the shift
-  size_t phrase_size = strlen(phrase) + 1;
   size_t length = strlen(phrase);
   int shift_index = length - (num % length);
-  char shifted[phrase_size];
 
   // Starting at the shifted index, length number of chars int phrase.
   strncpy(phrase, &doubled_phrase[shift_index], length);
