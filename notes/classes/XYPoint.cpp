@@ -27,7 +27,7 @@ void XYPoint::setX(double new_x) { x = new_x; }
 void XYPoint::setY(double new_y) { y = new_y; }
 
 /*double getX();*/
-double XYPoint::getX() { return x; }
+double XYPoint::getX() const { return x; }
 
 /*double getY();*/
-double XYPoint::getY() { return y; }
+double XYPoint::getY() const { return y; }

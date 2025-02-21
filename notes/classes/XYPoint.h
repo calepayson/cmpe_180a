@@ -12,8 +12,8 @@ class XYPoint {
     void setX(double new_x);
     void setY(double new_y);
 
-    double getX();
-    double getY();
+    double getX() const;
+    double getY() const;
 
    private:
     double x;
