@@ -1,0 +1,12 @@
+--------------
+- personType -
+--------------
+-firstName: string
+-lastName: string
+--------------
++print() const: void
++setName(string, string): void
++getFirstName() const: string
++getLastName() const: string
++personType()
++personType(string, string)
