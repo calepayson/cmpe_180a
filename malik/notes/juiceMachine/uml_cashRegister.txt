@@ -1,0 +1,9 @@
+----------------
+- cashRegister -
+----------------
+-cashOnHand: int
+----------------
++getCurrentBalance() const: int
++acceptAmount(int): void
++cashRegister()
++cashRegister(int)

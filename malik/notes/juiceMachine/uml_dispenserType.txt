@@ -1,0 +1,11 @@
+-----------------
+- dispenserType -
+-----------------
+-numberOfItems: int
+-cost: int
+-----------------
++getNoOfItems() const: int
++getCost() const: int
++makeSale(): void
++dispenserType
++dispenserType(int, int)
