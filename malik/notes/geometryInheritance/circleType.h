@@ -5,7 +5,7 @@
 
 class circleType : public pointType {
    public:
-    void setRadius(double r);
+    void setRadius(const double &new_r);
     void getRadius(double &r) const;
 
     void getArea(double &area) const;
@@ -14,7 +14,7 @@ class circleType : public pointType {
     void print() const;
 
     circleType();
-    circleType(double x, double y, double r);
+    circleType(const double &x, const double &y, const double &new_r);
     virtual ~circleType();
 
    private:
