@@ -3,13 +3,13 @@
 
 class pointType {
    public:
-    void getX(double &x) const;
-    void getY(double &y) const;
-    void getPoint(double &x, double &y) const;
+    void getX(double &other_x) const;
+    void getY(double &other_y) const;
+    void getPoint(double &other_x, double &other_y) const;
 
-    void setX(double x);
-    void setY(double y);
-    void setPoint(double x, double y);
+    void setX(double new_x);
+    void setY(double new_y);
+    void setPoint(double new_x, double new_y);
 
     void print() const;
 
