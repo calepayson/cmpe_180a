@@ -8,10 +8,14 @@
 using std::cerr;
 using std::cout;
 using std::endl;
+using std::fstream;
+using std::ifstream;
+using std::ofstream;
 using std::string;
 using std::vector;
 
 void print_usage(char s[]);
+bool create_new_file(const string &file_name);
 
 int main(int argc, char *argv[]) {
     string source_file;
@@ -31,7 +35,7 @@ int main(int argc, char *argv[]) {
             }
 
             // Logic
-            source_file = argv[i++ + 1];
+            source_file = argv[++i];
             source_provided = true;
         } else if (strcmp(argv[i], "-t") == 0) {
             // Error handling
@@ -44,7 +48,7 @@ int main(int argc, char *argv[]) {
             }
 
             // Logic
-            target_files.push_back(argv[i++ + 1]);
+            target_files.push_back(argv[++i]);
             target_provided = true;
         }
     }
@@ -60,13 +64,34 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    cout << "Source file: " << source_file << endl;
-    cout << "Target files: " << endl;
-    for (auto it = target_files.begin(); it != target_files.end(); it++) {
-        cout << *it << ", ";
+    ifstream source(source_file);
+    if (!source.is_open()) {
+        cerr << "Failed to open " << source_file << '!' << endl;
+        return 1;
     }
-    cout << endl;
 
+    for (auto it = target_files.begin(); it != target_files.end(); ++it) {
+        if (!create_new_file(*it)) {
+            return 1;
+        }
+        ofstream temp(*it);
+        if (!temp.is_open()) {
+            cerr << "Failed to open " << *it << '!' << endl;
+            return 1;
+        }
+
+        source.clear();
+        source.seekg(0, std::ios::beg);
+        string line;
+
+        while (std::getline(source, line)) {
+            temp << line << endl;
+        }
+
+        temp.close();
+    }
+
+    source.close();
     return 0;
 }
 
@@ -76,4 +101,23 @@ void print_usage(char s[]) {
     cerr << "Note: You may provide multiple target files but you must use a "
             "target flag for each"
          << endl;
+}
+
+bool create_new_file(const string &file_name) {
+    std::ifstream check_file(file_name);
+    if (check_file.good()) {
+        cerr << "Target file " << file_name << " already exists" << endl;
+        check_file.close();
+        return false;
+    }
+    check_file.close();
+
+    std::ofstream new_file(file_name);
+    if (!new_file.good()) {
+        cerr << "Failed to create " << file_name << endl;
+        return false;
+    }
+
+    new_file.close();
+    return true;
 }
