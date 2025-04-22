@@ -11,15 +11,24 @@ using std::string;
 
 float test_compilation();
 float test_constructor();
+float test_push();
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        cerr << "Usage " << argv[0] << " <test_name>" << endl;
-        cerr << "Supported tests:" << endl;
-        cerr << " - all" << endl;
-        cerr << " - compilation" << endl;
-        cerr << " - constructor" << endl;
-        return 1;
+        float total = 0;
+        cout << "-------------" << endl;
+        cout << "- FULL TEST -" << endl;
+        cout << "-------------" << endl;
+        total += test_compilation();
+        cout << "#####################################" << endl;
+        total += test_constructor();
+        cout << "#####################################" << endl;
+        total += test_push();
+        cout << "#####################################" << endl;
+        cout << "TOTAL SCORE: " << total << '!' << endl;
+        cout << "#####################################" << endl;
+
+        return 0;
     }
 
     string command = static_cast<string>(argv[1]);
@@ -27,14 +36,14 @@ int main(int argc, char *argv[]) {
         test_compilation();
     } else if (command == "constructor") {
         test_constructor();
-    } else if (command == "all") {
-        float total = 0;
-        total += test_compilation();
-        cout << "#####################################" << endl;
-        total += test_constructor();
-        cout << "#####################################" << endl;
-        cout << "TOTAL SCORE: " << total << '!' << endl;
+    } else if (command == "push") {
+        test_push();
     } else {
+        cerr << "Usage " << argv[0] << " <test_name>" << endl;
+        cerr << "Supported tests:" << endl;
+        cerr << " - compilation" << endl;
+        cerr << " - constructor" << endl;
+        cerr << " - push" << endl;
         return 1;
     }
 
@@ -60,6 +69,28 @@ float test_constructor() {
     std::stringstream ss;
     ss << c_list;
     bool success = (ss.str() == "{1}");
+
+    float points = success ? 11.25 : 0;
+    cout << "STATUS: " << (success ? "SUCCESS!" : "FAILURE!") << endl;
+    cout << "TOTAL: " << points << "/11.25!" << endl;
+
+    return points;
+}
+
+float test_push() {
+    cout << "Test: Push" << endl;
+    cout << "--------------------------" << endl;
+    CircularLinkedList c_list;
+    c_list.push(1, ClockWise);
+    c_list.push(2, ClockWise);
+    c_list.push(-1, ClockWise);
+    cout << "Expected: {1, -1, 2}" << endl;
+    cout << "Got:      " << c_list << endl;
+    cout << "--------------------------" << endl;
+
+    std::stringstream ss;
+    ss << c_list;
+    bool success = (ss.str() == "{1, -1, 2}");
 
     float points = success ? 11.25 : 0;
     cout << "STATUS: " << (success ? "SUCCESS!" : "FAILURE!") << endl;
