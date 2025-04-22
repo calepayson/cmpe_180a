@@ -12,6 +12,7 @@ using std::string;
 float test_compilation();
 float test_constructor();
 float test_push();
+float test_peek();
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -24,6 +25,8 @@ int main(int argc, char *argv[]) {
         total += test_constructor();
         cout << "#####################################" << endl;
         total += test_push();
+        cout << "#####################################" << endl;
+        total += test_peek();
         cout << "#####################################" << endl;
         cout << "TOTAL SCORE: " << total << '!' << endl;
         cout << "#####################################" << endl;
@@ -38,12 +41,15 @@ int main(int argc, char *argv[]) {
         test_constructor();
     } else if (command == "push") {
         test_push();
+    } else if (command == "peek") {
+        test_peek();
     } else {
         cerr << "Usage " << argv[0] << " <test_name>" << endl;
         cerr << "Supported tests:" << endl;
         cerr << " - compilation" << endl;
         cerr << " - constructor" << endl;
         cerr << " - push" << endl;
+        cerr << " - peek" << endl;
         return 1;
     }
 
@@ -58,7 +64,7 @@ float test_compilation() {
 }
 
 float test_constructor() {
-    cout << "Test: Constructor" << endl;
+    cout << "TEST: Constructor" << endl;
     cout << "--------------------------" << endl;
     CircularLinkedList c_list;
     c_list.push(1, ClockWise);
@@ -78,7 +84,7 @@ float test_constructor() {
 }
 
 float test_push() {
-    cout << "Test: Push" << endl;
+    cout << "TEST: Push" << endl;
     cout << "--------------------------" << endl;
     CircularLinkedList c_list;
     c_list.push(1, ClockWise);
@@ -91,6 +97,26 @@ float test_push() {
     std::stringstream ss;
     ss << c_list;
     bool success = (ss.str() == "{1, -1, 2}");
+
+    float points = success ? 11.25 : 0;
+    cout << "STATUS: " << (success ? "SUCCESS!" : "FAILURE!") << endl;
+    cout << "TOTAL: " << points << "/11.25!" << endl;
+
+    return points;
+}
+
+float test_peek() {
+    cout << "TEST: Peek" << endl;
+    cout << "--------------------------" << endl;
+    CircularLinkedList c_list;
+    c_list.push(1, ClockWise);
+    c_list.push(2, ClockWise);
+    c_list.push(-1, ClockWise);
+    cout << "Expected: 1" << endl;
+    cout << "Got:      " << c_list.peek() << endl;
+    cout << "--------------------------" << endl;
+
+    bool success = c_list.peek() == 1;
 
     float points = success ? 11.25 : 0;
     cout << "STATUS: " << (success ? "SUCCESS!" : "FAILURE!") << endl;
