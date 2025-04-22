@@ -14,6 +14,7 @@ float test_constructor();
 float test_push();
 float test_peek();
 float test_pop();
+float test_stdout();
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -30,6 +31,8 @@ int main(int argc, char *argv[]) {
         total += test_peek();
         cout << "#####################################" << endl;
         total += test_pop();
+        cout << "#####################################" << endl;
+        total += test_stdout();
         cout << "#####################################" << endl;
         cout << "TOTAL SCORE: " << total << '!' << endl;
         cout << "#####################################" << endl;
@@ -48,6 +51,8 @@ int main(int argc, char *argv[]) {
         test_peek();
     } else if (command == "pop") {
         test_pop();
+    } else if (command == "stdout") {
+        test_stdout();
     } else {
         cerr << "Usage " << argv[0] << " <test_name>" << endl;
         cerr << "Supported tests:" << endl;
@@ -55,6 +60,8 @@ int main(int argc, char *argv[]) {
         cerr << " - constructor" << endl;
         cerr << " - push" << endl;
         cerr << " - peek" << endl;
+        cerr << " - pop" << endl;
+        cerr << " - stdout" << endl;
         return 1;
     }
 
@@ -146,6 +153,28 @@ float test_pop() {
     std::stringstream ss;
     ss << c_list;
     bool success = (ss.str() == "{-1, 1, 2}");
+
+    float points = success ? 11.25 : 0;
+    cout << "STATUS: " << (success ? "SUCCESS!" : "FAILURE!") << endl;
+    cout << "TOTAL: " << points << "/11.25!" << endl;
+
+    return points;
+}
+
+float test_stdout() {
+    cout << "TEST: stdout" << endl;
+    cout << "--------------------------" << endl;
+    CircularLinkedList c_list;
+    c_list.push(1, ClockWise);
+    c_list.push(2, ClockWise);
+    c_list.push(-1, ClockWise);
+    cout << "Expected: {1, -1, 2}" << endl;
+    cout << "Got:      " << c_list << endl;
+    cout << "--------------------------" << endl;
+
+    std::stringstream ss;
+    ss << c_list;
+    bool success = (ss.str() == "{1, -1, 2}");
 
     float points = success ? 11.25 : 0;
     cout << "STATUS: " << (success ? "SUCCESS!" : "FAILURE!") << endl;
