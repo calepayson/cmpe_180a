@@ -38,8 +38,19 @@ class CircularLinkedList {
     // Overload << operator
     friend ostream &operator<<(ostream &os, const CircularLinkedList &list);
 
-   private:
+   protected:
     llNode *head;
+
+   private:
+    void push_to_list(int i, ClockDirection d);
+
+    int pop_from_list(ClockDirection d);
+
+    int peek_at_list() const;
+
+    void rotate_list(unsigned int n, ClockDirection d);
+
+    void destroy_list();
 };
 
 #endif
