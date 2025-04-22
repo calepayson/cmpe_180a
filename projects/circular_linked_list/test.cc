@@ -13,6 +13,7 @@ float test_compilation();
 float test_constructor();
 float test_push();
 float test_peek();
+float test_pop();
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -27,6 +28,8 @@ int main(int argc, char *argv[]) {
         total += test_push();
         cout << "#####################################" << endl;
         total += test_peek();
+        cout << "#####################################" << endl;
+        total += test_pop();
         cout << "#####################################" << endl;
         cout << "TOTAL SCORE: " << total << '!' << endl;
         cout << "#####################################" << endl;
@@ -43,6 +46,8 @@ int main(int argc, char *argv[]) {
         test_push();
     } else if (command == "peek") {
         test_peek();
+    } else if (command == "pop") {
+        test_pop();
     } else {
         cerr << "Usage " << argv[0] << " <test_name>" << endl;
         cerr << "Supported tests:" << endl;
@@ -117,6 +122,30 @@ float test_peek() {
     cout << "--------------------------" << endl;
 
     bool success = c_list.peek() == 1;
+
+    float points = success ? 11.25 : 0;
+    cout << "STATUS: " << (success ? "SUCCESS!" : "FAILURE!") << endl;
+    cout << "TOTAL: " << points << "/11.25!" << endl;
+
+    return points;
+}
+
+float test_pop() {
+    cout << "TEST: Pop" << endl;
+    cout << "--------------------------" << endl;
+    CircularLinkedList c_list;
+    c_list.push(1, ClockWise);
+    c_list.push(2, ClockWise);
+    c_list.push(-1, ClockWise);
+    c_list.pop(ClockWise);
+    c_list.push(1, ClockWise);
+    cout << "Expected: {-1, 1, 2}" << endl;
+    cout << "Got:      " << c_list << endl;
+    cout << "--------------------------" << endl;
+
+    std::stringstream ss;
+    ss << c_list;
+    bool success = (ss.str() == "{-1, 1, 2}");
 
     float points = success ? 11.25 : 0;
     cout << "STATUS: " << (success ? "SUCCESS!" : "FAILURE!") << endl;
