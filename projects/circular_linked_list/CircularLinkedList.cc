@@ -30,18 +30,19 @@ void CircularLinkedList::push(int i, ClockDirection d) {
     if (head == NULL) {
         new_node->next = new_node;
         new_node->prev = new_node;
+        head = new_node;
     } else if (d == ClockWise) {
         new_node->next = head->next;
-        new_node->next->prev = new_node;
         new_node->prev = head;
         head->next = new_node;
+        new_node->next->prev = new_node;
     } else {
         new_node->prev = head->prev;
-        new_node->prev->next = new_node;
         new_node->next = head;
+        new_node->prev->next = new_node;
+        ;
         head->prev = new_node;
     }
-    head = new_node;
 }
 
 int CircularLinkedList::pop(ClockDirection d) {
