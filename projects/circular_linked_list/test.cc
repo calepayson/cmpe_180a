@@ -15,6 +15,7 @@ float test_push();
 float test_peek();
 float test_pop();
 float test_stdout();
+float test_rotate();
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -33,6 +34,8 @@ int main(int argc, char *argv[]) {
         total += test_pop();
         cout << "#####################################" << endl;
         total += test_stdout();
+        cout << "#####################################" << endl;
+        total += test_rotate();
         cout << "#####################################" << endl;
         cout << "TOTAL SCORE: " << total << '!' << endl;
         cout << "#####################################" << endl;
@@ -53,6 +56,8 @@ int main(int argc, char *argv[]) {
         test_pop();
     } else if (command == "stdout") {
         test_stdout();
+    } else if (command == "rotate") {
+        test_rotate();
     } else {
         cerr << "Usage " << argv[0] << " <test_name>" << endl;
         cerr << "Supported tests:" << endl;
@@ -62,6 +67,7 @@ int main(int argc, char *argv[]) {
         cerr << " - peek" << endl;
         cerr << " - pop" << endl;
         cerr << " - stdout" << endl;
+        cerr << " - rotate" << endl;
         return 1;
     }
 
@@ -175,6 +181,31 @@ float test_stdout() {
     std::stringstream ss;
     ss << c_list;
     bool success = (ss.str() == "{1, -1, 2}");
+
+    float points = success ? 11.25 : 0;
+    cout << "STATUS: " << (success ? "SUCCESS!" : "FAILURE!") << endl;
+    cout << "TOTAL: " << points << "/11.25!" << endl;
+
+    return points;
+}
+
+float test_rotate() {
+    cout << "TEST: Rotate" << endl;
+    cout << "--------------------------" << endl;
+    CircularLinkedList c_list;
+    c_list.push(1, ClockWise);
+    c_list.push(2, ClockWise);
+    c_list.push(-1, ClockWise);
+    c_list.pop(ClockWise);
+    c_list.push(1, ClockWise);
+    c_list.rotate(2, ClockWise);
+    cout << "Expected: {2, -1, 1}" << endl;
+    cout << "Got:      " << c_list << endl;
+    cout << "--------------------------" << endl;
+
+    std::stringstream ss;
+    ss << c_list;
+    bool success = (ss.str() == "{2, -1, 1}");
 
     float points = success ? 11.25 : 0;
     cout << "STATUS: " << (success ? "SUCCESS!" : "FAILURE!") << endl;
